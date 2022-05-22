@@ -78,7 +78,14 @@
         </div>
       </div>
     </div>
-    <NotificationModal :notifyUser="notifyUser" @toggleModal="toggleModal" />
+    <NotificationModal
+      :notifyUser="notifyUser"
+      @toggleModal="toggleModal"
+      :title="title"
+      :msg="msg"
+      :icon="icon"
+    >
+    </NotificationModal>
   </div>
 </template>
 
@@ -94,6 +101,9 @@ export default {
       products: [],
 
       notifyUser: false,
+      title: "",
+      msg: "",
+      icon: "",
     };
   },
   methods: {
@@ -114,10 +124,17 @@ export default {
       try {
         await this.orderProducts(order);
 
+        this.title = "Order Submitted";
+        this.msg = "Your Order has been submitted successfully";
+        this.icon = "success";
+
         this.notifyUser = true;
       } catch (error) {
-        alert("something went wrong ");
-        console.log("error", error);
+        this.title = "submission Failed";
+        this.msg = error.response.data;
+
+        this.icon = "failed";
+        this.notifyUser = true;
       }
     },
     // toggling notification modal

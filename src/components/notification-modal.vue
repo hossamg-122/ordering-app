@@ -20,17 +20,24 @@
           >
             <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
               <div class="sm:flex sm:items-start">
-                <i class="fa-solid fa-circle-check text-2xl text-green-500"></i>
+                <i
+                  v-if="icon === 'success'"
+                  class="fa-solid fa-circle-check text-2xl text-green-500"
+                ></i>
+                <i
+                  v-else
+                  class="fa-solid fa-circle-exclamation text-2xl text-red-500"
+                ></i>
                 <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                   <h3
                     class="text-lg leading-6 font-bold text-gray-900"
                     id="modal-title"
                   >
-                    Order Submitted
+                    {{ title }}
                   </h3>
                   <div class="mt-2">
                     <p class="text-base text-gray-500">
-                      Your Order has been submitted successfully
+                      {{ msg }}
                     </p>
                   </div>
                 </div>
@@ -40,8 +47,7 @@
               class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse"
             >
               <button
-             
-               @click="$emit('toggleModal')"
+                @click="$emit('toggleModal')"
                 type="submit"
                 class="mt-6 w-full border border-transparent rounded-md py-3 px-8 flex items-center bg-primary hover:bg-primaryHovered justify-center text-base font-bold text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
               >
@@ -57,15 +63,29 @@
 
 <script>
 export default {
-   props:{
-       notifyUser:{
-           type:Boolean,
-           required:true,
-           default:false
-       }
-   }
-    }
-
+  props: {
+    notifyUser: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+    title: {
+      type: String,
+      required: true,
+      default: "",
+    },
+    msg: {
+      type: String,
+      required: true,
+      default: "",
+    },
+    icon: {
+      type: String,
+      required: true,
+      default: "",
+    },
+  },
+};
 </script>
 
 <style scoped>
