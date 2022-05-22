@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+ /* setuping the fonts of foodics website */
 @font-face {
     font-family: "Arabic Helvetica";
 
@@ -22,4 +22,9 @@
     src: url("./assets/fonts/HelveticaNeueLTArabic-Bold.ttf");
     font-style: normal;
     font-weight: 700;
+}
+@layer base {
+    html{
+        font-family:"Arabic Helvetica"
+    }
 }
