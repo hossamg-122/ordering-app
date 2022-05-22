@@ -104,13 +104,20 @@ export default {
     },
     // sending order to the api
     async buyOrder() {
+      let order = this.products.map((product) => {
+        return {
+          id: parseInt(product.id),
+          quantity: parseInt(product.quantity),
+        };
+      });
+
       try {
-        await this.orderProducts(this.products);
+        await this.orderProducts(order);
 
         this.notifyUser = true;
       } catch (error) {
-        alert("something went wrong ")
-        console.log("error", error.response.data);
+        alert("something went wrong ");
+        console.log("error", error);
       }
     },
     // toggling notification modal
